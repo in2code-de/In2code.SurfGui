@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file original="" product-name="TYPO3.Flow" source-language="en" target-language="de" datatype="plaintext">
+		<body>
+			<trans-unit id="in2codeDeployment" xml:space="preserve">
+				<source>in2code Deployment</source>
+				<target>in2code Deployment</target>
+			</trans-unit>
+			<trans-unit id="showAll" xml:space="preserve">
+				<source>Show all Deployments</source>
+				<target>Alle Deployments anzeigen</target>
+			</trans-unit>
+			<trans-unit id="openWebpage" xml:space="preserve">
+				<source>Open Web Page</source>
+				<target>Webseite öffnen</target>
+			</trans-unit>
+			<trans-unit id="logHistory" xml:space="preserve">
+				<source>Log History</source>
+				<target>Log anzeigen</target>
+			</trans-unit>
+			<trans-unit id="deployNow" xml:space="preserve">
+				<source>Deploy now</source>
+				<target>Jetzt deployen</target>
+			</trans-unit>
+			<trans-unit id="chooseProject" xml:space="preserve">
+				<source>Choose a Project</source>
+				<target>Projekt wählen</target>
+			</trans-unit>
+			<trans-unit id="help" xml:space="preserve">
+				<source>Help</source>
+				<target>Hilfe</target>
+			</trans-unit>
+			<trans-unit id="in2codeDeploymentHelp" xml:space="preserve">
+				<source>in2code Deployment Help</source>
+				<target>in2code Deployment Hilfe</target>
+			</trans-unit>
+			<trans-unit id="backToIndex" xml:space="preserve">
+				<source>Back to the index</source>
+				<target>Zurück zum Index</target>
+			</trans-unit>
+			<trans-unit id="exitHelp" xml:space="preserve">
+				<source>Exit Help</source>
+				<target>Hilf verlassen</target>
+			</trans-unit>
+			<trans-unit id="chooseGitSource" xml:space="preserve">
+				<source>Choose a Git Source</source>
+				<target>Git Quelle wählen</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

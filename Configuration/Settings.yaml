@@ -1,0 +1,5 @@
+In2code:
+  SurfGui:
+    logLines: 500
+    homePath: /var/www
+    gitExecutable: '/usr/bin/git'

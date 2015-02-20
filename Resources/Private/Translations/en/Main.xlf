@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file original="" product-name="TYPO3.Flow" source-language="en" datatype="plaintext">
+		<body>
+			<trans-unit id="in2codeDeployment" xml:space="preserve">
+				<source>in2code Deployment</source>
+			</trans-unit>
+			<trans-unit id="showAll" xml:space="preserve">
+				<source>Show all Deployments</source>
+			</trans-unit>
+			<trans-unit id="openWebpage" xml:space="preserve">
+				<source>Open Web Page</source>
+			</trans-unit>
+			<trans-unit id="logHistory" xml:space="preserve">
+				<source>Log History</source>
+			</trans-unit>
+			<trans-unit id="deployNow" xml:space="preserve">
+				<source>Deploy now</source>
+			</trans-unit>
+			<trans-unit id="chooseProject" xml:space="preserve">
+				<source>Choose a Project</source>
+			</trans-unit>
+			<trans-unit id="help" xml:space="preserve">
+				<source>Help</source>
+			</trans-unit>
+			<trans-unit id="in2codeDeploymentHelp" xml:space="preserve">
+				<source>in2code Deployment Help</source>
+			</trans-unit>
+			<trans-unit id="backToIndex" xml:space="preserve">
+				<source>Back to the index</source>
+			</trans-unit>
+			<trans-unit id="exitHelp" xml:space="preserve">
+				<source>Exit Help</source>
+			</trans-unit>
+			<trans-unit id="chooseGitSource" xml:space="preserve">
+				<source>Choose a Git Source</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

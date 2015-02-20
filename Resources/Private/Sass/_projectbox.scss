@@ -1,0 +1,87 @@
+.projectboxes {
+  @include clear;
+}
+
+.projectbox {
+  background-color: $grey;
+  padding: $abstand-desktop;
+  color: white;
+  width: 400px;
+  float: left;
+  margin: 0 $abstand-desktop $abstand-desktop 0;
+  h2, .git {
+    text-align: center;
+  }
+  .git {
+    font-size: 0.8em;
+  }
+  &.fadeout{
+    display: none;
+  }
+  .chosen-container {
+    width: 100% !important;
+  }
+  .list-caption {
+    text-align: center;
+    margin-top: 12px;
+    width: 100%;
+    display: block;
+    font-weight: bold;
+  }
+  form.full-width-form {
+    label {
+      display: inline-block;
+      width: 30%;
+    }
+    input {
+      display: inline-block;
+      width: 68%;
+      margin: $abstand-mobile 0 $abstand-mobile 0;
+      &.submit {
+        width: 100%;
+      }
+    }
+    select {
+      width: 68%;
+    }
+  }
+}
+
+.applications {
+  li {
+    color: $grey;
+    margin: $abstand-desktop 0 0 0;
+    padding: ($abstand-desktop / 2) ($abstand-desktop / 2) 1px ($abstand-desktop / 2);
+    background-color: $usersystem;
+  }
+  h3 {
+    margin: 0;
+    margin-bottom: 15px;
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    left: 0;
+    &.close:after {
+      content: "";
+      border: 8px solid transparent;
+      border-top-color: $grey;
+      position: absolute;
+      right: 0;
+      top: 10px;
+    }
+    &.open:after {
+      content: "";
+      border: 8px solid transparent;
+      border-bottom-color: $grey;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+  .properties {
+    display: none;
+    .nodes li {
+      background-color: $node;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+@media (max-width: 940px) {
+  body {
+    padding: 10px 10px 0 10px;
+  }
+  .projectbox {
+    width: 100%;
+    .btn {
+      width: 100%;
+    }
+  }
+
+  .float-right {
+    float: none;
+  }
+
+  .searchbox {
+    display: block;
+    > div, > a {
+      display: block !important;
+      width: 100% !important;
+      margin-left: 0;
+    }
+  }
+
+  .btn-allbranches {
+    margin-top: 40px;
+  }
+
+  .In2code-SurfGui-Logfile-Link {
+    margin-bottom: 10px;
+  }
+
+  .flashmessages {
+    top: $abstand-mobile;
+    left: $abstand-mobile;
+    right: $abstand-mobile;
+    li {
+      padding: 100px $abstand-mobile;
+    }
+  }
+}

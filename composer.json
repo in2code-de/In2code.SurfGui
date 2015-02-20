@@ -1,0 +1,21 @@
+{
+    "name": "in2code/surfgui",
+    "type": "typo3-flow-package",
+    "description": "Graphical User Interface for TYPO3.Surf",
+    "homepage": "http://in2code.de",
+    "license": ["GPL-3.0+"],
+    "authors": [
+        {
+            "name": "Oliver Eglseder",
+            "email": "oliver.eglseder@in2code.de"
+        }
+    ],
+    "require": {
+        "typo3/surf": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "In2code\\SurfGui": "Classes"
+        }
+    }
+}

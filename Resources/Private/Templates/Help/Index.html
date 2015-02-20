@@ -1,0 +1,16 @@
+<f:layout name="Default"/>
+
+<f:section name="Title">
+	<f:translate id="in2codeDeploymentHelp"/>
+</f:section>
+
+<f:section name="Content">
+		<f:link.action action="index">
+			<f:translate id="backToIndex"/>
+		</f:link.action>
+		<f:link.action action="index" controller="Deployment">
+			<f:translate id="exitHelp"/>
+		</f:link.action>
+	<br/>
+	<f:format.raw>{content}</f:format.raw>
+</f:section>

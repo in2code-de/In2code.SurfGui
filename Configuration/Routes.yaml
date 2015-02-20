@@ -1,0 +1,27 @@
+-
+  name: 'List Deployments'
+  uriPattern: ''
+  defaults:
+    '@package':    'In2code.SurfGui'
+    '@controller': 'Deployment'
+    '@action':     'index'
+    '@format':     'html'
+
+-
+  name: 'Deploy'
+  uriPattern: 'deploy'
+  defaults:
+    '@package':    'In2code.SurfGui'
+    '@controller': 'Deployment'
+    '@action':     'deploy'
+    '@format':     'html'
+  appendExceedingArguments: true
+-
+  name: 'Print Logfile'
+  uriPattern: 'logfile'
+  defaults:
+    '@package':    'In2code.SurfGui'
+    '@controller': 'Deployment'
+    '@action':     'printLogfile'
+    '@format':     'html'
+  appendExceedingArguments: true

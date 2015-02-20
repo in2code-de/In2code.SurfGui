@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="{lang}">
+	<head>
+		<meta charset="utf-8">
+		<title>
+			<f:render section="Title"/>
+		</title>
+		<f:base/>
+		<link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="{f:uri.resource(path: 'Css/basic.css')}" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+	</head>
+	<body>
+		<div id="preloader">
+			<div class="preloader"></div>
+		</div>
+
+		<header id="header" class="header">
+			<h1>SurfGui</h1>
+			<img class="header__logo" src="{f:uri.resource(path: 'Images/in2code_logo.svg')}" alt="in2code" width="140" height="42" />
+		</header>
+
+		<f:render section="Content"/>
+	</body>
+	<script src="{f:uri.resource(path: 'JavaScript/basic.min.js')}"></script>
+</html>

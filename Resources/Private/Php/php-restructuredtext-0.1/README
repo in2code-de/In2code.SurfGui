@@ -1,0 +1,6 @@
+PHP RestructuredText parser
+===========================
+
+Este proyecto está basado en código del parser PHP markdown:
+
+    http://michelf.com/projects/php-markdown/

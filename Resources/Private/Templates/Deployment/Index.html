@@ -1,0 +1,94 @@
+<f:layout name="Default"/>
+
+<f:section name="Title">
+	<f:translate id="in2codeDeployment"/>
+</f:section>
+
+<f:section name="Content">
+
+	<section id="projectselector" class="section projectselector"><h2>Wählen Sie das Projekt:</h2>
+		<f:form action="#" class="projectselector__form">
+			<f:form.select name="filterDeployment"
+						   additionalAttributes="{data-placeholder:'{f:translate(id:\'chooseProject\')}'}"
+						   class="In2code-SurfGui-Project-Select select"
+						   tabindex="2"
+						   options="{deployments}"
+						   prependOptionLabel=""
+						   prependOptionValue=""
+						   optionValueField="name"/>
+			<f:link.external uri="#" class="btn btn--block textcenter js-clearsearch">
+				<f:translate id="showAll"/>
+			</f:link.external>
+		</f:form>
+	</section>
+
+	<section class="section"><h2>Projekte</h2>
+		<ul id="projectlist" class="projectlist list-unstyled clearfix">
+
+			<f:for each="{deployments}" as="deployment" iteration="i">
+				<li class="project project--{deployment.system}" id="{deployment.name}">
+					<h3 class="project__title textcenter {f:if(condition:'{deployment.comment}',then:'icon-info')} description-{i.cycle}">
+						<f:if condition="{deployment.customName}">
+							<f:else>
+								{deployment.name}
+							</f:else>
+							<f:then>
+								{deployment.customName}
+							</f:then>
+						</f:if>
+					</h3>
+					<f:if condition="{deployment.comment}">
+						<p class="project__description field-info description-{i.cycle} invisible">
+							<f:format.raw>{deployment.comment}</f:format.raw>
+						</p>
+					</f:if>
+					<f:form action="deploy" arguments="{deployment:deployment.name}">
+						<ul class="list-unstyled project__applicationlist">
+							<f:for each="{deployment.applications}" as="application">
+								<span>{application.name}</span>
+								<li>
+									<f:form.select
+											additionalAttributes="{data-placeholder:'{f:translate(id:\'chooseGitSource\')}'}"
+											prependOptionLabel=""
+											class="In2code-SurfGui-Git-Source-Select select"
+											options="{application.repository.options}"/>
+
+									<button data-updateurl="{f:uri.action(action:'updateRepository',arguments:'{repository:application.repository}')}"
+											class="btn btn--block btn--icon btn--negative icon-refresh project__gitselector__refresh"
+											title="Update Repository">Update Repository
+									</button>
+								</li>
+
+							</f:for>
+						</ul>
+
+
+						<p>
+							<label for="{deployment.name}-verbosity">Verbose</label>
+							<f:form.checkbox id="{deployment.name}-verbosity"
+											 name="verbose"
+											 class="project__verbosity"
+											 value="1"
+											 checked="checked"/>
+						</p>
+						<f:form.submit
+								class="btn btn--block project__submit In2code-SurfGui-Deploy-Button"
+								value="{f:translate(id:'deployNow')}"
+								additionalAttributes="{data-in2code-surfgui-deployment:deployment.name}"/>
+						<br/>
+						<f:comment>
+							<!-- Not yet implemented -->
+							<button data-updateurl="https://community.surfdeploy-v2.dev.in2code.ws/in2code.surfgui/deployment/updaterepository/"
+									class="btn btn--block btn--icon btn--negative icon-mail-reply-all project__gitselector__roleback"
+									title="Rollback Repository">Rollback Deployment
+							</button>
+						</f:comment>
+						<button data-lightboxurl="{f:uri.action(action:'printLogFile',arguments:'{deployment:deployment.name}')}"
+								class="btn btn--block btn--icon project__logbutton icon-terminal In2code-SurfGui-Logfile-Link">
+							<f:translate id="logHistory"/>
+						</button>
+					</f:form>
+				</li>
+			</f:for>
+		</ul>
+</f:section>
