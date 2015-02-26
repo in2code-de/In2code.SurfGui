@@ -90,7 +90,13 @@ class DeploymentController extends BasicController {
 			throw new \Exception(self::INVALID_DEPLOYMENT, 1402497907);
 		}
 
-		$command = FLOW_PATH_ROOT . 'flow surf:deploy ' . $deployment;
+		$flowContext = getenv('FLOW_CONTEXT');
+		if ($flowContext === FALSE) {
+			$flowContext = 'Development';
+		}
+
+		$command = 'FLOW_CONTEXT=' . $flowContext . ' ';
+		$command .= FLOW_PATH_ROOT . 'flow surf:deploy ' . $deployment;
 		if ($verbose) {
 			$command .= ' --verbose';
 		}
