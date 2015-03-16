@@ -71,9 +71,12 @@ class DeploymentController extends BasicController {
 	public function indexAction() {
 		$deployments = new ArrayCollection();
 		foreach ($this->getDeploymentNames() as $deploymentName) {
-			$deployments->add(
-				Deployment::getDeploymentByName($deploymentName)
-			);
+			$deployment = Deployment::getDeploymentByName($deploymentName);
+			if (!$deployment->isDisabledInWeb()) {
+				$deployments->add(
+					$deployment
+				);
+			}
 		}
 		$this->view->assign('deployments', $deployments);
 	}

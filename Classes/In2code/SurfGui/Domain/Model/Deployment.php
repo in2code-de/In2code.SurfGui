@@ -64,6 +64,13 @@ class Deployment extends \TYPO3\Surf\Domain\Model\Deployment implements Deployme
 	protected $repositoryFactory;
 
 	/**
+	 * If set to TRUE this deployment won't be displayed in the GUI
+	 *
+	 * @var bool
+	 */
+	protected $disabledInWeb = FALSE;
+
+	/**
 	 * @return string
 	 */
 	public function getComment() {
@@ -177,4 +184,19 @@ class Deployment extends \TYPO3\Surf\Domain\Model\Deployment implements Deployme
 		return $deployment;
 	}
 
+	/**
+	 * @return boolean
+	 */
+	public function isDisabledInWeb() {
+		return $this->disabledInWeb;
+	}
+
+	/**
+	 * @param boolean $disabledInWeb
+	 * @return Deployment
+	 */
+	public function setDisabledInWeb($disabledInWeb) {
+		$this->disabledInWeb = $disabledInWeb;
+		return $this;
+	}
 }
