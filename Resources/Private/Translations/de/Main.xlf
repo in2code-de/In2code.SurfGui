@@ -46,6 +46,10 @@
 				<source>Choose a Git Source</source>
 				<target>Git Quelle wählen</target>
 			</trans-unit>
+			<trans-unit id="verbose" xml:space="preserve">
+				<source>Verbose</source>
+				<target>Ausführlich</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

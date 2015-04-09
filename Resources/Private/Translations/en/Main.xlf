@@ -35,6 +35,9 @@
 			<trans-unit id="chooseGitSource" xml:space="preserve">
 				<source>Choose a Git Source</source>
 			</trans-unit>
+			<trans-unit id="verbose" xml:space="preserve">
+				<source>Verbose</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
