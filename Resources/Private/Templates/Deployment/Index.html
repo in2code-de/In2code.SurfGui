@@ -30,10 +30,10 @@
 					<h3 class="project__title textcenter {f:if(condition:'{deployment.comment}',then:'icon-info')} description-{i.cycle}">
 						<f:if condition="{deployment.customName}">
 							<f:else>
-								{deployment.name}
+								<f:format.raw>{deployment.name}</f:format.raw>
 							</f:else>
 							<f:then>
-								{deployment.customName}
+                                <f:format.raw>{deployment.customName}</f:format.raw>
 							</f:then>
 						</f:if>
 					</h3>
