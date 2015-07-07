@@ -28,14 +28,7 @@
 			<f:for each="{deployments}" as="deployment" iteration="i">
 				<li class="project project--{deployment.system}" id="{deployment.name}">
 					<h3 class="project__title textcenter {f:if(condition:'{deployment.comment}',then:'icon-info')} description-{i.cycle}">
-						<f:if condition="{deployment.customName}">
-							<f:else>
-								<f:format.raw>{deployment.name}</f:format.raw>
-							</f:else>
-							<f:then>
-                                <f:format.raw>{deployment.customName}</f:format.raw>
-							</f:then>
-						</f:if>
+						<f:format.raw>{deployment.nameForDisplay}</f:format.raw>
 					</h3>
 					<f:if condition="{deployment.comment}">
 						<p class="project__description field-info description-{i.cycle} invisible">
@@ -48,14 +41,15 @@
 								<span>{application.name}</span>
 								<li>
 									<f:form.select
-											additionalAttributes="{data-placeholder:'{f:translate(id:\'chooseGitSource\')}'}"
-											prependOptionLabel=""
-											class="In2code-SurfGui-Git-Source-Select select"
-											options="{application.repository.options}"/>
+										additionalAttributes="{data-placeholder:'{f:translate(id:\'chooseGitSource\')}'}"
+										prependOptionLabel=""
+										class="In2code-SurfGui-Git-Source-Select select"
+										options="{application.repository.options}"/>
 
-									<button data-updateurl="{f:uri.action(action:'updateRepository',arguments:'{repository:application.repository}')}"
-											class="btn btn--block btn--icon btn--negative icon-refresh project__gitselector__refresh"
-											title="Update Repository">Update Repository
+									<button
+										data-updateurl="{f:uri.action(action:'updateRepository',arguments:'{repository:application.repository}')}"
+										class="btn btn--block btn--icon btn--negative icon-refresh project__gitselector__refresh"
+										title="Update Repository">Update Repository
 									</button>
 								</li>
 
@@ -64,26 +58,30 @@
 
 
 						<p>
-							<label for="{deployment.name}-verbosity"><f:translate id="verbose"/></label>
+							<label for="{deployment.name}-verbosity">
+								<f:translate id="verbose"/>
+							</label>
 							<f:form.checkbox id="{deployment.name}-verbosity"
 											 name="verbose"
 											 class="project__verbosity"
 											 value="1"/>
 						</p>
 						<f:form.submit
-								class="btn btn--block project__submit In2code-SurfGui-Deploy-Button"
-								value="{f:translate(id:'deployNow')}"
-								additionalAttributes="{data-in2code-surfgui-deployment:deployment.name}"/>
+							class="btn btn--block project__submit In2code-SurfGui-Deploy-Button"
+							value="{f:translate(id:'deployNow')}"
+							additionalAttributes="{data-in2code-surfgui-deployment:deployment.name}"/>
 						<br/>
 						<f:comment>
 							<!-- Not yet implemented -->
-							<button data-updateurl="https://community.surfdeploy-v2.dev.in2code.ws/in2code.surfgui/deployment/updaterepository/"
-									class="btn btn--block btn--icon btn--negative icon-mail-reply-all project__gitselector__roleback"
-									title="Rollback Repository">Rollback Deployment
+							<button
+								data-updateurl="https://community.surfdeploy-v2.dev.in2code.ws/in2code.surfgui/deployment/updaterepository/"
+								class="btn btn--block btn--icon btn--negative icon-mail-reply-all project__gitselector__roleback"
+								title="Rollback Repository">Rollback Deployment
 							</button>
 						</f:comment>
-						<button data-lightboxurl="{f:uri.action(action:'printLogFile',arguments:'{deployment:deployment.name}')}"
-								class="btn btn--block btn--icon project__logbutton icon-terminal In2code-SurfGui-Logfile-Link">
+						<button
+							data-lightboxurl="{f:uri.action(action:'printLogFile',arguments:'{deployment:deployment.name}')}"
+							class="btn btn--block btn--icon project__logbutton icon-terminal In2code-SurfGui-Logfile-Link">
 							<f:translate id="logHistory"/>
 						</button>
 					</f:form>

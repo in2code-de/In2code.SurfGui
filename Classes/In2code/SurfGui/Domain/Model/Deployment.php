@@ -155,16 +155,6 @@ class Deployment extends \TYPO3\Surf\Domain\Model\Deployment implements Deployme
 	}
 
 	/**
-	 * @return string
-	 */
-	public function __toString() {
-		if ($this->customName) {
-			return $this->customName;
-		}
-		return $this->name;
-	}
-
-	/**
 	 * @param \TYPO3\Surf\Domain\Model\Application $application
 	 * @return \In2code\SurfGui\Domain\Model\Application
 	 */
@@ -198,5 +188,15 @@ class Deployment extends \TYPO3\Surf\Domain\Model\Deployment implements Deployme
 	public function setDisabledInWeb($disabledInWeb) {
 		$this->disabledInWeb = $disabledInWeb;
 		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getNameForDisplay() {
+		if (!empty($this->customName)) {
+			return $this->customName;
+		}
+		return $this->name;
 	}
 }
