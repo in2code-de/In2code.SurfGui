@@ -14,63 +14,36 @@ namespace In2code\SurfGui\Utility;
  *
  * @package In2code\SurfGui\Utility
  */
-class SurfCliArgument {
-
+class SurfCliArgument
+{
 	/**
-	 * @param string $for if there are more than one application
-	 *      you can identify the branch by this string
 	 * @return string
 	 */
-	static public function getBranch($for = '') {
-		$branch = '';
-		if (FLOW_SAPITYPE === 'CLI') {
-			if ($for) {
-				foreach ($_SERVER['argv'] as $commandLineArgument) {
-					if (substr($commandLineArgument, 0, 10 + strlen($for)) === '--branch-' . $for . '=') {
-						$branch = substr($commandLineArgument, 9);
-					}
-				}
-			} else {
-				foreach ($_SERVER['argv'] as $commandLineArgument) {
-					if (substr($commandLineArgument, 0, 9) === '--branch=') {
-						$branch = substr($commandLineArgument, 9);
-					}
-				}
-			}
-		}
-		return $branch;
-	}
-
-	/**
-	 * @param string $for
-	 * @return string
-	 */
-	static public function getGitSource($for = '') {
+	static public function getGitSource() {
 		if (FLOW_SAPITYPE === 'CLI') {
 			$type = 'branch';
-			$source = '';
+			$source = 'master';
 			foreach ($_SERVER['argv'] as $commandLineArgument) {
-				if ($for) {
-					if (substr($commandLineArgument, 0, 7 + strlen($for)) === '--tag-' . $for . '=') {
-						$source = substr($commandLineArgument, 7 + strlen($for));
-						$type = 'tag';
-						break;
-					}
-				} else {
-					if (substr($commandLineArgument, 0, 6) === '--tag=') {
-						$source = substr($commandLineArgument, 6 + strlen($for));
-						$type = 'tag';
-						break;
-					}
+				if (substr($commandLineArgument, 0, 6) === '--tag=') {
+					$source = substr($commandLineArgument, 6);
+					$type = 'tag';
+					break;
+				}
+				if (substr($commandLineArgument, 0, 7) === '--sha1=') {
+					$source = substr($commandLineArgument, 7);
+					$type = 'sha1';
+					break;
+				}
+				if (substr($commandLineArgument, 0, 9) === '--branch=') {
+					$source = substr($commandLineArgument, 9);
+					$type = 'branch';
+					break;
 				}
 			}
-			if ($type === 'branch') {
-				$source = self::getBranch($for);
-			}
 			return array(
-				$type => $source
+				$type => $source,
 			);
 		}
-		return FALSE;
+		return false;
 	}
 }
