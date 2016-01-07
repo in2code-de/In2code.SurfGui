@@ -82,6 +82,20 @@ class DeploymentController extends BasicController {
 	}
 
 	/**
+	 * @throws \TYPO3\Flow\Mvc\Exception\InvalidArgumentNameException
+	 * @throws \TYPO3\Flow\Mvc\Exception\InvalidArgumentTypeException
+	 * @throws \TYPO3\Flow\Mvc\Exception\NoSuchArgumentException
+	 */
+	public function initializeDeployAction() {
+		if ($this->request->hasArgument('source')) {
+			$source = $this->request->getArgument('source');
+			if ($source === 'undefined') {
+				$this->request->setArgument('source', null);
+			}
+		}
+	}
+
+	/**
 	 * @param string $deployment
 	 * @param bool $verbose
 	 * @param GitEntityInterface $source

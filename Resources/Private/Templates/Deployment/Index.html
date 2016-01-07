@@ -40,19 +40,21 @@
 						<ul class="list-unstyled project__applicationlist">
 							<f:for each="{deployment.applications}" as="application">
 								<span>{application.name}</span>
-								<li>
-									<f:form.select
-										additionalAttributes="{data-placeholder:'{f:translate(id:\'chooseGitSource\')}'}"
-										prependOptionLabel=""
-										class="In2code-SurfGui-Git-Source-Select select"
-										options="{application.repository.options}"/>
+								<f:if condition="{application.repository}">
+									<li>
+										<f:form.select
+											additionalAttributes="{data-placeholder:'{f:translate(id:\'chooseGitSource\')}'}"
+											prependOptionLabel=""
+											class="In2code-SurfGui-Git-Source-Select select"
+											options="{application.repository.options}"/>
 
-									<button
-										data-updateurl="{f:uri.action(action:'updateRepository',arguments:'{repository:application.repository}')}"
-										class="btn btn--block btn--icon btn--negative icon-refresh project__gitselector__refresh"
-										title="Update Repository">Update Repository
-									</button>
-								</li>
+										<button
+											data-updateurl="{f:uri.action(action:'updateRepository',arguments:'{repository:application.repository}')}"
+											class="btn btn--block btn--icon btn--negative icon-refresh project__gitselector__refresh"
+											title="Update Repository">Update Repository
+										</button>
+									</li>
+								</f:if>
 
 							</f:for>
 						</ul>

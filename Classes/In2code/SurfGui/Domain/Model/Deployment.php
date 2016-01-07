@@ -122,17 +122,19 @@ class Deployment extends \TYPO3\Surf\Domain\Model\Deployment implements Deployme
 	public function addApplication(\TYPO3\Surf\Domain\Model\Application $application) {
 		$application = $this->convertApplicationToSurfGuiApplication($application);
 
-		$repositoryUrl = $application->getOption('repositoryUrl');
-		// get the repository, if there is none, make a new one from the repo-url
-		$repository = $this->repositoryRepository->findOneByUrl($repositoryUrl);
-		if ($repository === NULL) {
-			// the factory makes a fresh instance and
-			// retrieves all branches an tags for the repository
-			$repository = $this->repositoryFactory->makeInstance(array('repositoryUrl' => $repositoryUrl));
-			$this->repositoryRepository->add($repository);
-			$this->persistenceManager->persistAll();
+		if ($application->hasOption('repositoryUrl')) {
+			$repositoryUrl = $application->getOption('repositoryUrl');
+			// get the repository, if there is none, make a new one from the repo-url
+			$repository = $this->repositoryRepository->findOneByUrl($repositoryUrl);
+			if ($repository === NULL) {
+				// the factory makes a fresh instance and
+				// retrieves all branches an tags for the repository
+				$repository = $this->repositoryFactory->makeInstance(array('repositoryUrl' => $repositoryUrl));
+				$this->repositoryRepository->add($repository);
+				$this->persistenceManager->persistAll();
+			}
+			$application->setRepository($repository);
 		}
-		$application->setRepository($repository);
 
 		$this->applications[$application->getName()] = $application;
 		return $this;
