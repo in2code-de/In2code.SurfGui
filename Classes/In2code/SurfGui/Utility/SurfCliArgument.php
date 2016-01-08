@@ -16,34 +16,35 @@ namespace In2code\SurfGui\Utility;
  */
 class SurfCliArgument
 {
-	/**
-	 * @return string
-	 */
-	static public function getGitSource() {
-		if (FLOW_SAPITYPE === 'CLI') {
-			$type = 'branch';
-			$source = 'master';
-			foreach ($_SERVER['argv'] as $commandLineArgument) {
-				if (substr($commandLineArgument, 0, 6) === '--tag=') {
-					$source = substr($commandLineArgument, 6);
-					$type = 'tag';
-					break;
-				}
-				if (substr($commandLineArgument, 0, 7) === '--sha1=') {
-					$source = substr($commandLineArgument, 7);
-					$type = 'sha1';
-					break;
-				}
-				if (substr($commandLineArgument, 0, 9) === '--branch=') {
-					$source = substr($commandLineArgument, 9);
-					$type = 'branch';
-					break;
-				}
-			}
-			return array(
-				$type => $source,
-			);
-		}
-		return false;
-	}
+    /**
+     * @return string
+     */
+    static public function getGitSource()
+    {
+        if (FLOW_SAPITYPE === 'CLI') {
+            $type = 'branch';
+            $source = 'master';
+            foreach ($_SERVER['argv'] as $commandLineArgument) {
+                if (substr($commandLineArgument, 0, 6) === '--tag=') {
+                    $source = substr($commandLineArgument, 6);
+                    $type = 'tag';
+                    break;
+                }
+                if (substr($commandLineArgument, 0, 7) === '--sha1=') {
+                    $source = substr($commandLineArgument, 7);
+                    $type = 'sha1';
+                    break;
+                }
+                if (substr($commandLineArgument, 0, 9) === '--branch=') {
+                    $source = substr($commandLineArgument, 9);
+                    $type = 'branch';
+                    break;
+                }
+            }
+            return array(
+                $type => $source,
+            );
+        }
+        return false;
+    }
 }

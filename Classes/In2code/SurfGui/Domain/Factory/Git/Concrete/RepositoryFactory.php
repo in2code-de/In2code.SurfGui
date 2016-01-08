@@ -21,52 +21,54 @@ use TYPO3\Flow\Annotations as Flow;
  *
  * @package In2code\SurfGui\Domain\Factory\Git\Concrete
  */
-class RepositoryFactory {
+class RepositoryFactory
+{
+    /**
+     * @var GitHelper
+     * @Flow\Inject
+     */
+    protected $gitHelper;
 
-	/**
-	 * @var GitHelper
-	 * @Flow\Inject
-	 */
-	protected $gitHelper;
+    /**
+     * @param array $arguments
+     * @return Repository
+     */
+    public function makeInstance(array $arguments)
+    {
+        if (!isset($arguments['repositoryUrl'])) {
+            return null;
+        }
+        $repositoryUrl = $arguments['repositoryUrl'];
+        $repository = new Repository($repositoryUrl);
 
-	/**
-	 * @param array $arguments
-	 * @return Repository
-	 */
-	public function makeInstance(array $arguments) {
-		if (!isset($arguments['repositoryUrl'])) {
-			return NULL;
-		}
-		$repositoryUrl = $arguments['repositoryUrl'];
-		$repository = new Repository($repositoryUrl);
+        foreach ($this->gitHelper->getTagsFromRepositoryUrl($repositoryUrl) as $tagInformation) {
+            $repository->addTag(new Tag($tagInformation[1], $tagInformation[0]));
+        }
+        foreach ($this->gitHelper->getBranchesFromRepositoryUrl($repositoryUrl) as $branchInformation) {
+            $repository->addBranch(new Branch($branchInformation[1], $branchInformation[0]));
+        }
 
-		foreach ($this->gitHelper->getTagsFromRepositoryUrl($repositoryUrl) as $tagInformation) {
-			$repository->addTag(new Tag($tagInformation[1], $tagInformation[0]));
-		}
-		foreach ($this->gitHelper->getBranchesFromRepositoryUrl($repositoryUrl) as $branchInformation) {
-			$repository->addBranch(new Branch($branchInformation[1], $branchInformation[0]));
-		}
+        return $repository;
+    }
 
-		return $repository;
-	}
+    /**
+     * @param Repository $repository
+     * @return Repository
+     */
+    public function updateRepository(Repository $repository)
+    {
+        $repositoryUrl = $repository->getUrl();
 
-	/**
-	 * @param Repository $repository
-	 * @return Repository
-	 */
-	public function updateRepository(Repository $repository) {
-		$repositoryUrl = $repository->getUrl();
+        $repository->setTags(new ArrayCollection());
+        foreach ($this->gitHelper->getTagsFromRepositoryUrl($repositoryUrl) as $tagInformation) {
+            $repository->addTag(new Tag($tagInformation[1], $tagInformation[0]));
+        }
 
-		$repository->setTags(new ArrayCollection());
-		foreach ($this->gitHelper->getTagsFromRepositoryUrl($repositoryUrl) as $tagInformation) {
-			$repository->addTag(new Tag($tagInformation[1], $tagInformation[0]));
-		}
+        $repository->setBranches(new ArrayCollection());
+        foreach ($this->gitHelper->getBranchesFromRepositoryUrl($repositoryUrl) as $branchInformation) {
+            $repository->addBranch(new Branch($branchInformation[1], $branchInformation[0]));
+        }
 
-		$repository->setBranches(new ArrayCollection());
-		foreach ($this->gitHelper->getBranchesFromRepositoryUrl($repositoryUrl) as $branchInformation) {
-			$repository->addBranch(new Branch($branchInformation[1], $branchInformation[0]));
-		}
-
-		return $repository;
-	}
+        return $repository;
+    }
 }

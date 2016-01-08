@@ -17,5 +17,6 @@ use TYPO3\Flow\Persistence\Repository;
  *
  * @Flow\Scope("singleton")
  */
-class TagRepository extends Repository {
+class TagRepository extends Repository
+{
 }

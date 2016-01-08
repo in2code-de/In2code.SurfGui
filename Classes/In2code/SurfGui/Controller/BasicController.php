@@ -18,36 +18,46 @@ use TYPO3\Flow\Mvc\View\ViewInterface;
  *
  * @package In2code\SurfGui\Controller
  */
-class BasicController extends ActionController {
+class BasicController extends ActionController
+{
+    /**
+     * @Flow\Inject
+     * @var \TYPO3\Flow\I18n\Service
+     */
+    protected $i18nService;
 
-	/**
-	 * @Flow\Inject
-	 * @var \TYPO3\Flow\I18n\Service
-	 */
-	protected $i18nService;
+    /**
+     * @Flow\Inject
+     * @var \TYPO3\Flow\I18n\Detector
+     */
+    protected $i18nDetector;
 
-	/**
-	 * @Flow\Inject
-	 * @var \TYPO3\Flow\I18n\Detector
-	 */
-	protected $i18nDetector;
+    /**
+     * @return void
+     */
+    protected function initializeAction()
+    {
+        parent::initializeAction();
+        $acceptLanguageHeader = $this->request->getHttpRequest()
+                                              ->getHeaders()
+                                              ->get('Accept-Language');
+        $locale = $this->i18nDetector->detectLocaleFromHttpHeader($acceptLanguageHeader);
+        $this->i18nService->getConfiguration()
+                          ->setCurrentLocale($locale);
+    }
 
-	/**
-	 * @return void
-	 */
-	protected function initializeAction() {
-		parent::initializeAction();
-		$acceptLanguageHeader = $this->request->getHttpRequest()->getHeaders()->get('Accept-Language');
-		$locale = $this->i18nDetector->detectLocaleFromHttpHeader($acceptLanguageHeader);
-		$this->i18nService->getConfiguration()->setCurrentLocale($locale);
-	}
-
-	/**
-	 * @param \TYPO3\Flow\Mvc\View\ViewInterface $view
-	 * @return void
-	 */
-	protected function initializeView(ViewInterface $view) {
-		parent::initializeView($view);
-		$view->assign('lang', $this->i18nService->getConfiguration()->getCurrentLocale()->getLanguage());
-	}
+    /**
+     * @param \TYPO3\Flow\Mvc\View\ViewInterface $view
+     * @return void
+     */
+    protected function initializeView(ViewInterface $view)
+    {
+        parent::initializeView($view);
+        $view->assign(
+            'lang',
+            $this->i18nService->getConfiguration()
+                              ->getCurrentLocale()
+                              ->getLanguage()
+        );
+    }
 }

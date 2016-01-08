@@ -16,30 +16,31 @@ use TYPO3\Surf\Domain\Model\Application;
  *
  * @package In2code\SurfGui\Domain\Factory
  */
-class ApplicationFactory {
+class ApplicationFactory
+{
+    /**
+     * @param Application $sourceObject
+     * @param string $destination
+     * @return mixed
+     */
+    public function convert(Application $sourceObject, $destination)
+    {
+        if (get_class($sourceObject) == trim('\\', $destination)) {
+            return $sourceObject;
+        }
+        $destinationObject = new $destination();
+        $sourceReflectionObject = new \ReflectionObject($sourceObject);
+        $destinationReflectionObject = new \ReflectionObject($destinationObject);
 
-	/**
-	 * @param Application $sourceObject
-	 * @param string $destination
-	 * @return mixed
-	 */
-	public function convert(Application $sourceObject, $destination) {
-		if (get_class($sourceObject) == trim('\\', $destination)) {
-			return $sourceObject;
-		}
-		$destinationObject = new $destination();
-		$sourceReflectionObject = new \ReflectionObject($sourceObject);
-		$destinationReflectionObject = new \ReflectionObject($destinationObject);
-
-		foreach ($sourceReflectionObject->getProperties() as $sourceReflectionProperty) {
-			$sourceReflectionProperty->setAccessible(TRUE);
-			$name = $sourceReflectionProperty->getName();
-			if ($destinationReflectionObject->hasProperty($name)) {
-				$reflectionProperty = $destinationReflectionObject->getProperty($name);
-				$reflectionProperty->setAccessible(TRUE);
-				$reflectionProperty->setValue($destinationObject, $sourceReflectionProperty->getValue($sourceObject));
-			}
-		}
-		return $destinationObject;
-	}
+        foreach ($sourceReflectionObject->getProperties() as $sourceReflectionProperty) {
+            $sourceReflectionProperty->setAccessible(true);
+            $name = $sourceReflectionProperty->getName();
+            if ($destinationReflectionObject->hasProperty($name)) {
+                $reflectionProperty = $destinationReflectionObject->getProperty($name);
+                $reflectionProperty->setAccessible(true);
+                $reflectionProperty->setValue($destinationObject, $sourceReflectionProperty->getValue($sourceObject));
+            }
+        }
+        return $destinationObject;
+    }
 }

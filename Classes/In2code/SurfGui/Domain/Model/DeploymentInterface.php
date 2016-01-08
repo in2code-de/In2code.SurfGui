@@ -14,6 +14,6 @@ namespace In2code\SurfGui\Domain\Model;
  *
  * @package In2code\SurfGui\Domain
  */
-interface DeploymentInterface {
-
+interface DeploymentInterface
+{
 }

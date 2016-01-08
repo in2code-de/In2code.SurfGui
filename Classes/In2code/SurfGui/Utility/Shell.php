@@ -23,85 +23,91 @@ use TYPO3\Flow\Annotations as Flow;
  *
  * @package In2code\SurfGui\Utility
  */
-class Shell {
+class Shell
+{
+    /**
+     * @var string
+     */
+    protected $command;
 
-	/**
-	 * @var string
-	 */
-	protected $command;
+    /**
+     * @var string
+     */
+    protected $homePath;
 
-	/**
-	 * @var string
-	 */
-	protected $homePath;
+    /**
+     * @var resource
+     */
+    protected $process;
 
-	/**
-	 * @var resource
-	 */
-	protected $process;
+    /**
+     * @var bool
+     */
+    protected $redirectStdErr = false;
 
-	/**
-	 * @var bool
-	 */
-	protected $redirectStdErr = FALSE;
+    /**
+     * @param string $command
+     * @param string $homePath
+     * @param bool $redirectStdErr
+     */
+    public function __construct($command, $homePath = '', $redirectStdErr = false)
+    {
+        $this->command = $command;
+        $this->homePath = $homePath;
+        $this->redirectStdErr = $redirectStdErr;
+    }
 
-	/**
-	 * @param string $command
-	 * @param string $homePath
-	 * @param bool $redirectStdErr
-	 */
-	public function __construct($command, $homePath = '', $redirectStdErr = FALSE) {
-		$this->command = $command;
-		$this->homePath = $homePath;
-		$this->redirectStdErr = $redirectStdErr;
-	}
+    /**
+     * @return void
+     */
+    public function run()
+    {
+        $additionalArguments = $this->redirectStdErr ? ' 2>&1' : '';
+        $homePath = $this->homePath ? 'HOME=' . $this->homePath . ' ' : '';
+        $this->process = popen($homePath . $this->command . $additionalArguments, 'r');
+    }
 
-	/**
-	 * @return void
-	 */
-	public function run() {
-		$additionalArguments = $this->redirectStdErr ? ' 2>&1' : '';
-		$homePath = $this->homePath ? 'HOME=' . $this->homePath . ' ' : '';
-		$this->process = popen($homePath . $this->command . $additionalArguments, 'r');
-	}
+    /**
+     * Returns a Line from the running Command
+     * If all Lines are read, this will return FALSE
+     *
+     * @return bool|string
+     */
+    public function getLine()
+    {
+        if (!feof($this->process)) {
+            return fgets($this->process);
+        } else {
+            $this->tearDown();
+        }
+        return false;
+    }
 
-	/**
-	 * Returns a Line from the running Command
-	 * If all Lines are read, this will return FALSE
-	 *
-	 * @return bool|string
-	 */
-	public function getLine() {
-		if (!feof($this->process)) {
-			return fgets($this->process);
-		} else {
-			$this->tearDown();
-		}
-		return FALSE;
-	}
+    /**
+     * @return void
+     */
+    public function __destruct()
+    {
+        $this->tearDown();
+    }
 
-	/**
-	 * @return void
-	 */
-	public function __destruct() {
-		$this->tearDown();
-	}
+    /**
+     * @return void
+     */
+    public function __sleep()
+    {
+        $this->tearDown();
+    }
 
-	/**
-	 * @return void
-	 */
-	public function __sleep() {
-		$this->tearDown();
-	}
-
-	/**
-	 * @return int
-	 */
-	public function tearDown() {
-		$returnInteger = 1;
-		if (is_resource($this->process)) {
-			$returnInteger = pclose($this->process);
-		}
-		return $returnInteger;
-	}
+    /**
+     * @return int
+     */
+    public function tearDown()
+    {
+        $returnInteger = 1;
+        if (is_resource($this->process)) {
+            $returnInteger = pclose($this->process);
+        }
+        return $returnInteger;
+    }
 }

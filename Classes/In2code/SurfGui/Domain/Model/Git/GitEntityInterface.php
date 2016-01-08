@@ -14,20 +14,20 @@ namespace In2code\SurfGui\Domain\Model\Git;
  *
  * @package In2code\SurfGui\Domain\Model\Git
  */
-interface GitEntityInterface {
+interface GitEntityInterface
+{
+    /**
+     * Return the identifying string of the object,
+     * which will be passed to the command line
+     *
+     * @return string
+     */
+    public function getForArgument();
 
-	/**
-	 * Return the identifying string of the object,
-	 * which will be passed to the command line
-	 *
-	 * @return string
-	 */
-	public function getForArgument();
-
-	/**
-	 * Returns the identifying attribute
-	 *
-	 * @return string
-	 */
-	public function __toString();
+    /**
+     * Returns the identifying attribute
+     *
+     * @return string
+     */
+    public function __toString();
 }

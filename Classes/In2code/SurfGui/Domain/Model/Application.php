@@ -16,26 +16,28 @@ use In2code\SurfGui\Domain\Model\Git\Repository;
  *
  * @package In2code\SurfGui\Domain\Model
  */
-class Application extends \TYPO3\Surf\Domain\Model\Application {
+class Application extends \TYPO3\Surf\Domain\Model\Application
+{
+    /**
+     * @var Repository
+     */
+    protected $repository;
 
-	/**
-	 * @var Repository
-	 */
-	protected $repository;
+    /**
+     * @return Repository
+     */
+    public function getRepository()
+    {
+        return $this->repository;
+    }
 
-	/**
-	 * @return Repository
-	 */
-	public function getRepository() {
-		return $this->repository;
-	}
-
-	/**
-	 * @param Repository $repository
-	 * @return $this
-	 */
-	public function setRepository(Repository $repository) {
-		$this->repository = $repository;
-		return $this;
-	}
+    /**
+     * @param Repository $repository
+     * @return $this
+     */
+    public function setRepository(Repository $repository)
+    {
+        $this->repository = $repository;
+        return $this;
+    }
 }
