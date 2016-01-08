@@ -54,7 +54,7 @@ class DeploymentLocker {
 		if ($this->deployment instanceof Deployment && !$this->deployment instanceof \In2code\SurfGui\Domain\Model\Deployment) {
 			if ($this->isLockerForRunningDeployment) {
 				unlink($this->getLockFilePath() . $this->getLockFileName($this->deployment));
-				echo 'LOCK FILE REMOVED';
+				echo 'LOCK FILE REMOVED' . PHP_EOL;
 			}
 		}
 	}
@@ -85,7 +85,7 @@ class DeploymentLocker {
 		);
 
 		file_put_contents($this->getLockFilePath() . $this->getLockFileName($deployment), json_encode($lockInformation));
-		echo 'LOCK FILE CREATED';
+		echo 'LOCK FILE CREATED' . PHP_EOL;
 	}
 
 	/**
